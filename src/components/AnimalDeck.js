@@ -26,9 +26,24 @@ class AnimalDeck extends HTMLElement {
   actualizarFondo() {
     const animal = this._animales[this._indice];
     const grupo = GRUPOS.find(g => g.id === animal.grupo);
-    if (grupo) {
-      document.body.style.background = grupo.fondo;
+    if (!grupo || !grupo.fondoImg) return;
+
+    const bg1 = document.getElementById("bg-1");
+    const bg2 = document.getElementById("bg-2");
+    if (!bg1 || !bg2) return;
+
+    if (bg1.style.opacity === "") {
+      bg1.style.backgroundImage = `url(${grupo.fondoImg})`;
+      bg1.style.opacity = "1";
+      return;
     }
+
+    const activa = bg1.style.opacity !== "0" ? bg1 : bg2;
+    const inactiva = activa === bg1 ? bg2 : bg1;
+
+    inactiva.style.backgroundImage = `url(${grupo.fondoImg})`;
+    inactiva.style.opacity = "1";
+    activa.style.opacity = "0";
   }
 
   aleatorizar(array) {
@@ -46,23 +61,30 @@ class AnimalDeck extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
-        .deck {
+        .wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1rem;
         }
+        h1 {
+          font-family: 'Playwrite ID', cursive;
+          font-size: 3.5rem;
+          margin: 0;
+          color: #fff;
+          text-shadow: 0 4px 8px rgba(1,1,1,1);
+        }
+        .row {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
         .card-container {
           transition: transform 0.3s ease, opacity 0.3s ease;
-          user-select: none;
         }
-        .controls {
-          display: flex;
-          gap: 2rem;
-        }
-        .controls button {
-          width: 60px;
-          height: 60px;
+        .row button {
+          width: 80px;
+          height: 80px;
           border: none;
           border-radius: 50%;
           font-size: 1.5rem;
@@ -71,27 +93,22 @@ class AnimalDeck extends HTMLElement {
           color: #fff;
           transition: background 0.2s;
         }
-        .controls button:hover {
+        .row button:hover {
           background: rgba(255,255,255,0.4);
         }
       </style>
-      <div class="deck">
-        <div class="card-container">
-          <animal-card emoji="${animal.emoji}" nombre="${animal.nombre}"></animal-card>
-        </div>
-        <div class="controls">
+      <div class="wrapper">
+        <h1>${animal.nombre}</h1>
+        <div class="row">
           <button id="prev">◀</button>
+          <div class="card-container">
+            <animal-card emoji="${animal.emoji}" nombre="${animal.nombre}" imagen="${animal.img}"></animal-card>
+          </div>
           <button id="next">▶</button>
         </div>
       </div>
     `;
 
-    this.shadowRoot.getElementById("prev").addEventListener("click", () => this.anterior());
-    this.shadowRoot.getElementById("next").addEventListener("click", () => this.siguiente());
-
-    const card = this.shadowRoot.querySelector(".card-container");
-    card.addEventListener("mousedown", (e) => this.iniciarArrastre(e));
-    card.addEventListener("touchstart", (e) => this.iniciarArrastre(e), { passive: true });
   }
 
   siguiente() {
@@ -102,6 +119,7 @@ class AnimalDeck extends HTMLElement {
     setTimeout(() => {
       this._indice = (this._indice + 1) % this._animales.length;
       this.render();
+      this.agregarEventos();
       this.animarEntrada();
       this.actualizarFondo();
     }, 300);
@@ -115,6 +133,7 @@ class AnimalDeck extends HTMLElement {
     setTimeout(() => {
       this._indice = (this._indice - 1 + this._animales.length) % this._animales.length;
       this.render();
+      this.agregarEventos();
       this.animarEntrada();
       this.actualizarFondo();
     }, 300);
@@ -133,50 +152,6 @@ class AnimalDeck extends HTMLElement {
   agregarEventos() {
     this.shadowRoot.getElementById("prev").addEventListener("click", () => this.anterior());
     this.shadowRoot.getElementById("next").addEventListener("click", () => this.siguiente());
-
-    const card = this.shadowRoot.querySelector(".card-container");
-    card.addEventListener("mousedown", (e) => this.iniciarArrastre(e));
-    card.addEventListener("touchstart", (e) => this.iniciarArrastre(e), { passive: true });
-  }
-
-  iniciarArrastre(e) {
-    const punto = e.touches ? e.touches[0] : e;
-    this._arrastrando = true;
-    this._inicioX = punto.clientX;
-    this._desplazamiento = 0;
-
-    const mover = (ev) => {
-      if (!this._arrastrando) return;
-      const p = ev.touches ? ev.touches[0] : ev;
-      this._desplazamiento = p.clientX - this._inicioX;
-      const container = this.shadowRoot.querySelector(".card-container");
-      container.style.transform = `translateX(${this._desplazamiento}px)`;
-      container.style.opacity = `${1 - Math.abs(this._desplazamiento) / 400}`;
-    };
-
-    const soltar = () => {
-      this._arrastrando = false;
-      document.removeEventListener("mousemove", mover);
-      document.removeEventListener("mouseup", soltar);
-      document.removeEventListener("touchmove", mover);
-      document.removeEventListener("touchend", soltar);
-
-      if (Math.abs(this._desplazamiento) > 80) {
-        if (this._desplazamiento < 0) this.siguiente();
-        else this.anterior();
-      } else {
-        this.animarEntrada();
-      }
-    };
-
-    this._arrastrando = true;
-    this._inicioX = punto.clientX;
-    this._desplazamiento = 0;
-
-    document.addEventListener("mousemove", mover);
-    document.addEventListener("mouseup", soltar);
-    document.addEventListener("touchmove", mover, { passive: true });
-    document.addEventListener("touchend", soltar);
   }
 }
 

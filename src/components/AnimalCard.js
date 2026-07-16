@@ -7,53 +7,56 @@ class AnimalCard extends HTMLElement {
   connectedCallback(){
     const emoji = this.getAttribute("emoji");
     const nombre= this.getAttribute("nombre");
+    const imagen= this.getAttribute("imagen");
     this.shadowRoot.innerHTML= `
       <style>
-        article {
-          background: #fff;
-          color: #222;
+        .wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+        .card {
+          width: 320px;
+          height: 320px;
           border-radius: 20px;
-          padding: 2rem;
-          text-align: center;
-          width: 300px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          overflow: hidden;
+          background: #fff;
+          box-shadow: 0 30px 30px rgba(0,0,1,1);
         }
-        .emoji {
-          font-size: 120px;
+        .card img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
           display: block;
-        }
-        h1 {
-          font-size: 1.5rem;
-          margin: 0 0 1rem;
         }
         .actions {
           display: flex;
           gap: 1rem;
-          justify-content: center;
-          margin-top: 1rem;
         }
         button {
           padding: 0.5rem 1rem;
           border: none;
           border-radius: 10px;
-          font-size: 1rem;
+          font-size: 1.5rem;
           cursor: pointer;
-          background: #f0f0f0;
+          background: rgba(255,255,255,0.2);
+          color: #fff;
+          backdrop-filter: blur(4px);
         }
         button:hover {
-          background: #ddd;
+          background: rgba(255,255,255,0.4);
         }
       </style>
-      <article>
-        <h1>${emoji} ${nombre}</h1>
+      <div class="wrapper">
         <div class="card">
-          <span class="emoji">${emoji}</span>
+          <img src="${imagen}" alt="${emoji}">
         </div>
         <div class="actions">
           <button id="voz">🔊 Nombre</button>
           <button id="sonido">🎶 Sonido</button>
         </div>
-      </article>
+      </div>
       `;
   }
 }
