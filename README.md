@@ -4,9 +4,9 @@ App interactiva para que los más pequeños aprendan los animales. Navega entre 
 
 ## ✨ Funcionalidades
 
-- **Tarjetas con imagen real** de cada animal
+- **Tarjetas con imagen ** de cada animal
 - **Navegación con botones** ◀ ▶ para pasar de animal
-- **Lectura del nombre** con voz amable (Laura, en español)
+- **Lectura del nombre** con voz amable
 - **Sonido real del animal** 🎶
 - **Fondos temáticos** que cambian según el grupo del animal
 - **Transiciones suaves** pensadas para niños pequeños
