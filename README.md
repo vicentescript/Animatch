@@ -4,7 +4,7 @@ App interactiva para que los más pequeños aprendan los animales. Navega entre 
 
 ## ✨ Funcionalidades
 
-- **Tarjetas con imagen ** de cada animal
+- **Tarjetas con imagen** de cada animal
 - **Navegación con botones** ◀ ▶ para pasar de animal
 - **Lectura del nombre** con voz amable
 - **Sonido real del animal** 🎶
