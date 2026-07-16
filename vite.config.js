@@ -2,9 +2,9 @@ import { defineConfig } from "vite";
 import path from "node:path";
 
 const isGitHubPages = true;
-const folderName = path.basename(process.cwd()) + "/";
+const repo = "Animatch";
 const mode = process.env.NODE_ENV === "production" ? "production" : "development";
-const base = mode === "production" && isGitHubPages ? "/" + folderName : "/";
+const base = mode === "production" && isGitHubPages ? "/" + repo + "/" : "/";
 
 export default defineConfig({
   root: "src",
