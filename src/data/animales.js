@@ -15,7 +15,7 @@ export const ANIMALES = [
   { id: "gato",     nombre: "Gato",     grupo: "domesticos", emoji: "🐱", img: `${BASE}assets/images/animales/gato.webp`, sonido: S("gato") },
   { id: "pez",      nombre: "Pez",      grupo: "domesticos", emoji: "🐟", img: `${BASE}assets/images/animales/pez.webp`, sonido: S("pez") },
   { id: "conejo",   nombre: "Conejo",   grupo: "domesticos", emoji: "🐰", img: `${BASE}assets/images/animales/conejo.webp`, sonido: S("conejo") },
-  { id: "tortuga",  nombre: "Tortuga",  grupo: "domesticos", emoji: "🐢", img: `${BASE}assets/images/animales/tortuga.webp`, sonido: S("pez") },
+  { id: "tortuga",  nombre: "Tortuga",  grupo: "domesticos", emoji: "🐢", img: `${BASE}assets/images/animales/tortuga.webp`, sonido: S("tortuga") },
   { id: "loro",     nombre: "Loro",     grupo: "domesticos", emoji: "🦜", img: `${BASE}assets/images/animales/loro.webp`, sonido: S("loro") },
 
   { id: "vaca",     nombre: "Vaca",     grupo: "granja", emoji: "🐮", img: `${BASE}assets/images/animales/vaca.webp`, sonido: S("vaca") },
@@ -35,6 +35,6 @@ export const ANIMALES = [
   { id: "delfin",   nombre: "Delfín",   grupo: "marinos", emoji: "🐬", img: `${BASE}assets/images/animales/delfin.webp`, sonido: S("delfin") },
   { id: "ballena",  nombre: "Ballena",  grupo: "marinos", emoji: "🐋", img: `${BASE}assets/images/animales/ballena.webp`, sonido: S("ballena") },
   { id: "pez-payaso", nombre: "Pez Payaso", grupo: "marinos", emoji: "🐠", img: `${BASE}assets/images/animales/ppayaso.webp`, sonido: S("pez") },
-  { id: "tortuga-marina", nombre: "Tortuga Marina", grupo: "marinos", emoji: "🐢", img: `${BASE}assets/images/animales/tmarina.webp`, sonido: S("pez") },
+  { id: "tortuga-marina", nombre: "Tortuga Marina", grupo: "marinos", emoji: "🐢", img: `${BASE}assets/images/animales/tmarina.webp`, sonido: S("tortuga") },
   { id: "foca",     nombre: "Foca",     grupo: "marinos", emoji: "🦭", img: `${BASE}assets/images/animales/foca.webp`, sonido: S("foca") }
 ];
