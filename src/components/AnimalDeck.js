@@ -102,7 +102,7 @@ class AnimalDeck extends HTMLElement {
         <div class="row">
           <button id="prev">◀</button>
           <div class="card-container">
-            <animal-card emoji="${animal.emoji}" nombre="${animal.nombre}" imagen="${animal.img}"></animal-card>
+            <animal-card emoji="${animal.emoji}" nombre="${animal.nombre}" imagen="${animal.img}" sonido="${animal.sonido || ''}"></animal-card>
           </div>
           <button id="next">▶</button>
         </div>
