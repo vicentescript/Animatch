@@ -50,6 +50,17 @@ class AnimalCard extends HTMLElement {
         button:hover {
           background: rgba(255,255,255,0.4);
         }
+        @media (max-width: 600px) {
+          .card {
+            width: min(85vw, 320px);
+            height: auto;
+            aspect-ratio: 1;
+          }
+          button {
+            font-size: 1.2rem;
+            padding: 0.4rem 0.8rem;
+          }
+        }
       </style>
       <div class="wrapper">
         <div class="card">

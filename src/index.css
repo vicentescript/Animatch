@@ -16,3 +16,9 @@ body {
   background: center / cover no-repeat;
   transition: opacity 0.8s ease;
 }
+
+@media (max-width: 600px) {
+  body {
+    padding-top: 2vh;
+  }
+}

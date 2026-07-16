@@ -96,6 +96,19 @@ class AnimalDeck extends HTMLElement {
         .row button:hover {
           background: rgba(255,255,255,0.4);
         }
+        @media (max-width: 600px) {
+          h1 {
+            font-size: 2.2rem;
+          }
+          .row {
+            gap: 0.8rem;
+          }
+          .row button {
+            width: 55px;
+            height: 55px;
+            font-size: 1.2rem;
+          }
+        }
       </style>
       <div class="wrapper">
         <h1>${animal.nombre}</h1>
