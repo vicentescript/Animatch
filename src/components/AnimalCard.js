@@ -1,3 +1,8 @@
+let audioActual = null;
+document.addEventListener("stop-sound", () => {
+  if (audioActual) { audioActual.pause(); audioActual = null; }
+});
+
 speechSynthesis.getVoices();
 
 class AnimalCard extends HTMLElement {
@@ -90,9 +95,10 @@ class AnimalCard extends HTMLElement {
 
     this.shadowRoot.getElementById("sonido").addEventListener("click", () => {
       if (!sonido) return;
-      const audio = new Audio(sonido);
-      audio.volume = 0.7;
-      audio.play();
+      if (audioActual) { audioActual.pause(); audioActual = null; }
+      audioActual = new Audio(sonido);
+      audioActual.volume = 0.7;
+      audioActual.play();
     });
   }
 }

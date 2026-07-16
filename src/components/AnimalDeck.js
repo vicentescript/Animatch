@@ -125,6 +125,7 @@ class AnimalDeck extends HTMLElement {
   }
 
   siguiente() {
+    document.dispatchEvent(new CustomEvent("stop-sound"));
     const container = this.shadowRoot.querySelector(".card-container");
     container.style.transform = "translateX(-100%)";
     container.style.opacity = "0";
@@ -139,6 +140,7 @@ class AnimalDeck extends HTMLElement {
   }
 
   anterior() {
+    document.dispatchEvent(new CustomEvent("stop-sound"));
     const container = this.shadowRoot.querySelector(".card-container");
     container.style.transform = "translateX(100%)";
     container.style.opacity = "0";
