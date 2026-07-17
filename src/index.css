@@ -3,10 +3,9 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 5vh;
-  background: #171717;
+  align-items: center;
   color: #fff;
+  font-family: system-ui, sans-serif;
 }
 
 #bg-1, #bg-2 {
@@ -17,8 +16,83 @@ body {
   transition: opacity 0.8s ease;
 }
 
-@media (max-width: 600px) {
-  body {
-    padding-top: 2vh;
-  }
+#inicio::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  z-index: -1;
+}
+
+#inicio {
+  text-align: center;
+  position: relative;
+}
+
+.logo {
+  max-width: 300px;
+  height: auto;
+}
+
+#inicio p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 2rem;
+  opacity: 0.8;
+}
+
+#grupos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+}
+
+.grupo-btn {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.grupo-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.grupo-btn.activo {
+  border-color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+#jugar {
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 16px;
+  background: #fff;
+  color: #171717;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#jugar:hover {
+  transform: scale(1.05);
+}
+
+#juego {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#juego[hidden] {
+  display: none;
 }

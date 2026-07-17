@@ -88,8 +88,8 @@ class AnimalCard extends HTMLElement {
       const voz = voces.find(v => v.name.includes("Laura") && v.lang.startsWith("es"));
       if (voz) msg.voice = voz;
 
-      msg.pitch = 1.4;
-      msg.rate = 0.8;
+      msg.pitch = 1.8;
+      msg.rate = 0.7;
       speechSynthesis.speak(msg);
     });
 

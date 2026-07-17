@@ -28,14 +28,18 @@ class AnimalDeck extends HTMLElement {
     const grupo = GRUPOS.find(g => g.id === animal.grupo);
     if (!grupo || !grupo.fondoImg) return;
 
-    const bg1 = document.getElementById("bg-1");
-    const bg2 = document.getElementById("bg-2");
-    if (!bg1 || !bg2) return;
+    let bg1 = document.getElementById("bg-1");
+    let bg2 = document.getElementById("bg-2");
 
-    if (bg1.style.opacity === "") {
-      bg1.style.backgroundImage = `url(${grupo.fondoImg})`;
-      bg1.style.opacity = "1";
-      return;
+    if (!bg1) {
+      bg1 = document.createElement("div");
+      bg1.id = "bg-1";
+      document.body.prepend(bg1);
+    }
+    if (!bg2) {
+      bg2 = document.createElement("div");
+      bg2.id = "bg-2";
+      document.body.prepend(bg2);
     }
 
     const activa = bg1.style.opacity !== "0" ? bg1 : bg2;
@@ -109,6 +113,20 @@ class AnimalDeck extends HTMLElement {
             font-size: 1.2rem;
           }
         }
+        .btn-salir {
+          margin-top: 1rem;
+          padding: 0.5rem 1.5rem;
+          border: 2px solid rgba(255,255,255,0.3);
+          border-radius: 12px;
+          background: transparent;
+          color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .btn-salir:hover {
+          background: rgba(255,255,255,0.1);
+        }
       </style>
       <div class="wrapper">
         <h1>${animal.nombre}</h1>
@@ -119,9 +137,18 @@ class AnimalDeck extends HTMLElement {
           </div>
           <button id="next">▶</button>
         </div>
+        <button id="reset" class="btn-salir">Salir</button>
       </div>
     `;
 
+    this.shadowRoot.getElementById("reset")?.addEventListener("click", () => {
+      document.getElementById("juego").hidden = true;
+      document.getElementById("inicio").hidden = false;
+      const bg1 = document.getElementById("bg-1");
+      const bg2 = document.getElementById("bg-2");
+      if (bg1) bg1.style.backgroundImage = `url(${import.meta.env.BASE_URL}assets/images/fondos/fondo.webp)`;
+      if (bg2) bg2.style.opacity = "0";
+    });
   }
 
   siguiente() {
@@ -165,8 +192,10 @@ class AnimalDeck extends HTMLElement {
   }
 
   agregarEventos() {
-    this.shadowRoot.getElementById("prev").addEventListener("click", () => this.anterior());
-    this.shadowRoot.getElementById("next").addEventListener("click", () => this.siguiente());
+    this.shadowRoot.getElementById("prev").addEventListener("click", () =>
+      this.anterior());
+    this.shadowRoot.getElementById("next").addEventListener("click", () =>
+      this.siguiente());
   }
 }
 
